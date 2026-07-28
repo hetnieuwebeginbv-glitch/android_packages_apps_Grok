@@ -6,7 +6,7 @@
         "aidl/**/*.aidl",
     ],
     aidl: {
-        include_dirs: ["packages/apps/Stay4S/AetherCore/aidl"],
+        include_dirs: ["packages/apps/AetherCore/aidl"],
     },
     resource_dirs: ["res"],
     manifest: "AndroidManifest.xml",
