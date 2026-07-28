@@ -1,0 +1,79 @@
+﻿<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.stay4s.grok">
+
+    <!-- Core permissions for privileged Grok Agent + Guardian -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESSIBILITY_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY" />
+
+    <!-- AetherCore AIDL binding permission -->
+    <uses-permission android:name="com.stay4s.permission.USE_AETHERCORE" />
+
+    <!-- Privileged system app declaration -->
+    <application
+        android:name=".GrokApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:process=":agent"
+        android:directBootAware="true">
+
+        <!-- The main Grok Agent Core Service (Parallel Brain + Guardian) -->
+        <service
+            android:name=".GrokAgentCoreService"
+            android:exported="true"
+            android:foregroundServiceType="specialUse"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+
+        <!-- Daily Guardian background component -->
+        <service
+            android:name=".guardian.DailyGuardianAgent"
+            android:exported="false"
+            android:foregroundServiceType="specialUse" />
+
+        <!-- Basic Grok Launcher / Home (Pillar 3 foundation) -->
+        <activity
+            android:name=".launcher.GrokLauncherActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Accessibility Service for real ToolUse actions (Pillar 2) -->
+        <service
+            android:name=".tools.AccessibilityToolRegistry"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- Boot receiver so Guardian can start early -->
+        <receiver
+            android:name=".integration.boot.GrokBootReceiver"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

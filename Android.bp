@@ -1,0 +1,18 @@
+﻿android_app {
+    name: "Grok",
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+        "aidl/**/*.aidl",
+    ],
+    aidl: {
+        include_dirs: ["packages/apps/Stay4S/AetherCore/aidl"],
+    },
+    resource_dirs: ["res"],
+    manifest: "AndroidManifest.xml",
+    certificate: "platform",
+    privileged: true,
+    product_specific: true,
+    sdk_version: "current",
+    platform_apis: true,
+}

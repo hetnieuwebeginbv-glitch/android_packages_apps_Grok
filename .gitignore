@@ -1,0 +1,15 @@
+﻿# Build outputs
+build/
+out/
+*.apk
+*.ap_
+*.dex
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
