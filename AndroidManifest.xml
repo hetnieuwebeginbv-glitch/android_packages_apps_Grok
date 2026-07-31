@@ -1,15 +1,12 @@
-﻿<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stay4s.grok">
 
     <!-- Core permissions for privileged Grok Agent + Guardian -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.ACCESSIBILITY_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
-    <uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY" />
 
     <!-- AetherCore AIDL binding permission -->
     <uses-permission android:name="com.stay4s.permission.USE_AETHERCORE" />
@@ -18,7 +15,6 @@
     <application
         android:name=".GrokApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
         android:process=":agent"
@@ -27,9 +23,8 @@
         <!-- The main Grok Agent Core Service (Parallel Brain + Guardian) -->
         <service
             android:name=".GrokAgentCoreService"
-            android:exported="true"
-            android:foregroundServiceType="specialUse"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+            android:exported="false"
+            android:foregroundServiceType="specialUse" />
 
         <!-- Daily Guardian background component -->
         <service
