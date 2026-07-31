@@ -1,4 +1,4 @@
-﻿android_app {
+android_app {
     name: "Grok",
     srcs: [
         "src/**/*.java",
@@ -13,6 +13,5 @@
     certificate: "platform",
     privileged: true,
     product_specific: true,
-    sdk_version: "current",
     platform_apis: true,
 }
