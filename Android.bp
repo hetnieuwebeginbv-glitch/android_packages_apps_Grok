@@ -1,18 +1,22 @@
-﻿android_app {
+android_app {
     name: "Grok",
     srcs: [
         "src/**/*.java",
         "src/**/*.kt",
         "aidl/**/*.aidl",
     ],
+    exclude_srcs: [
+        "src/com/stay4s/grok/launcher/sample/*.kt",
+    ],
+    static_libs: [
+        "kotlinx-coroutines-android",
+    ],
     aidl: {
-        include_dirs: ["packages/apps/AetherCore/aidl"],
+        include_dirs: ["packages/apps/Stay4S/AetherCore/aidl"],
     },
     resource_dirs: ["res"],
     manifest: "AndroidManifest.xml",
     certificate: "platform",
     privileged: true,
-    product_specific: true,
-    sdk_version: "current",
     platform_apis: true,
 }

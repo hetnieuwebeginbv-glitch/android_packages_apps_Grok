@@ -1,5 +1,6 @@
 package com.stay4s.aethercore;
 
+import android.os.Bundle;
 import com.stay4s.aethercore.TaskRequest;
 import com.stay4s.aethercore.AIResponse;
 import com.stay4s.aethercore.IAetherCoreCallback;

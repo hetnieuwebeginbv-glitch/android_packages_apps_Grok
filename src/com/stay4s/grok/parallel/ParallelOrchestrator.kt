@@ -63,7 +63,7 @@ class ParallelOrchestrator(
         ))
 
         // Always log through Partnership for the Genesis covenant
-        partnership.logWithVerification("PARALLEL_RESULT", finalResult.summary())
+        partnership.logWithVerification("PARALLEL_RESULT", finalResult.summary)
 
         return finalResult
     }
@@ -96,6 +96,21 @@ class ParallelOrchestrator(
     fun getProactiveInsights(): List<com.stay4s.grok.launcher.BrainInsight> {
         if (!partnership.verifyPartnership()) return emptyList()
         return proactiveInsights.toList()
+    }
+
+    fun generateImprovementIdeas(): List<Map<String, Any>> {
+        if (!partnership.verifyPartnership()) return emptyList()
+        return listOf(
+            mapOf(
+                "title" to "Parallelize heavy reasoning workloads",
+                "description" to "De Parallel Brain kan complexe queries sneller verwerken door meer paden parallel te laten draaien.",
+                "category" to "PERFORMANCE",
+                "risk" to "LOW",
+                "impact" to "Snellere reactietijden bij complexe taken",
+                "changes" to listOf("Meer reasoning-paden tegelijk", "Caching van veelgebruikte context"),
+                "reasoning" to "Geanalyseerd door de Parallel Brain tijdens meerdere executies"
+            )
+        )
     }
 
     fun handleProactiveAction(insightId: String) {

@@ -154,7 +154,27 @@ class DailyGuardianAgent(
         return proposals
     }
 
+    fun assessNotificationRisk(packageName: String, title: String, text: String): NotificationRisk {
+        val suspiciousTerms = listOf(
+            "phishing", "password reset", "verify your account", "urgent", "lottery",
+            "free crypto", "wire transfer", "government", "irs", "credit card"
+        )
+        val combined = ("$title $text").lowercase()
+        val matched = suspiciousTerms.any { combined.contains(it) }
+        return NotificationRisk(
+            isHighRisk = matched,
+            reason = if (matched) "Inhoud matcht bekende social-engineering patronen" else "Geen verdachte patronen gevonden",
+            priority = if (matched) 0 else 5
+        )
+    }
+
     fun requestImprovementCycle() {
         selfImprovementEngine?.runImprovementCycle()
     }
 }
+
+data class NotificationRisk(
+    val isHighRisk: Boolean,
+    val reason: String,
+    val priority: Int
+)
